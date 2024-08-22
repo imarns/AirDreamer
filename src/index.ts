@@ -7,9 +7,20 @@ import cors from 'cors';
 
 
 const app = express();
-app.use(cors({ origin: 'http://localhost:3000' }));
+
+// Define allowed origins based on the environment
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? [process.env.CUSTOM_DOMAIN, `www.${process.env.CUSTOM_DOMAIN}`].filter(Boolean) as string[]
+  : 'http://localhost:3000';
+
+// Use CORS middleware with dynamic origin setting
+app.use(cors({
+  origin: allowedOrigins,
+}));
+
 const port = 5000;
 app.use(express.json());
+
 
 // Initialize and cache airport data on server start
 initializeAirportDataCache()

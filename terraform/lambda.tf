@@ -35,6 +35,7 @@ resource "aws_lambda_function" "backend_lambda" {
   environment {
     variables = {
       API_KEY = var.api_key  # Reference the API key variable from variables.tf
+      CUSTOM_DOMAIN = var.custom_domain_name
     }
   }
 }

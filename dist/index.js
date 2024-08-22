@@ -19,7 +19,14 @@ const dynamodb_1 = __importDefault(require("./dynamodb"));
 const uuid_1 = require("uuid");
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)({ origin: 'http://localhost:3000' }));
+// Define allowed origins based on the environment
+const allowedOrigins = process.env.NODE_ENV === 'production'
+    ? [process.env.CUSTOM_DOMAIN, `www.${process.env.CUSTOM_DOMAIN}`].filter(Boolean)
+    : 'http://localhost:3000';
+// Use CORS middleware with dynamic origin setting
+app.use((0, cors_1.default)({
+    origin: allowedOrigins,
+}));
 const port = 5000;
 app.use(express_1.default.json());
 // Initialize and cache airport data on server start

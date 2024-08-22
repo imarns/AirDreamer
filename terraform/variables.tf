@@ -27,3 +27,7 @@ variable "api_key" {
   description = "API key for accessing the AviationStack API"
   type        = string
 }
+variable "custom_domain_name" {
+  description = "The custom domain name to use for CloudFront (e.g., yourdomain.com)"
+  type        = string
+}
