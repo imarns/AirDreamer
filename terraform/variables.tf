@@ -21,3 +21,9 @@ variable "api_gateway_name" {
   type        = string
   default     = "SleepCycleCalculatorAPI"
 }
+
+# Define the variable for the API key
+variable "api_key" {
+  description = "API key for accessing the AviationStack API"
+  type        = string
+}

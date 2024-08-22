@@ -30,6 +30,13 @@ resource "aws_lambda_function" "backend_lambda" {
   runtime          = "nodejs18.x"  # Runtime for Node.js
   role             = aws_iam_role.lambda_exec_role.arn
   source_code_hash = filebase64sha256("lambda.zip")  # Ensures the function is updated if the code changes
+
+  # Add the environment variables block here
+  environment {
+    variables = {
+      API_KEY = var.api_key  # Reference the API key variable from variables.tf
+    }
+  }
 }
 
 # API Gateway to Expose the Lambda Function
